@@ -50,12 +50,13 @@ export const HeaderArea = styled.div`
       margin: 0;
       padding: 0;      
       list-style: none;
+      display: flex;
     }
     ul{
-      display: flex;
       height: 40px;
     }
     li{
+      align-items: center;
       margin: 0 20px;
 
       a{

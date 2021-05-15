@@ -2,7 +2,8 @@ import logo from './logo.svg';
 import './App.css';
 import Home from './pages/Home';
 import About from './pages/About';
-// import Login from './pages/Login';
+import NotFound from './pages/NotFound';
+import Login from './pages/SignIn';
 // import Categoria from './pages/Categoria'; 
 import styled from 'styled-components';
 import React, { useState , useEffect} from 'react';
@@ -25,9 +26,9 @@ function App() {
       <Route exact path="/">
         <Home />
       </Route>
-      {/* <Route path="/login">
+      <Route path="/signin">
         <Login />
-      </Route> */}
+      </Route>
       <Route exact path="/about">
         <About />
       </Route>            
@@ -35,7 +36,7 @@ function App() {
         <Categoria />
       </Route> */}
       <Route path="*">
-        <h4>Página não encontrada</h4>
+        <NotFound />        
       </Route>
     </Switch>
   );

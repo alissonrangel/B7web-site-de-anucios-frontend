@@ -4,7 +4,7 @@ import { PageArea } from './styled'
 import { PageContainer, PageTitle, ErrorMessage } from '../../components/MainComponents'
 import useAPI from '../../helpers/SiteAPI';
 import { doLogin } from '../../helpers/AuthHandler';
-import { async } from 'q';
+
 
 const Page = () => {
 
@@ -29,6 +29,7 @@ const Page = () => {
       doLogin(json.token, rememberPassword);
       window.location.href = '/';
     }
+    setDisabled(false);
   }
 
   return (

@@ -59,13 +59,17 @@ export const HeaderArea = styled.div`
       align-items: center;
       margin: 0 20px;
 
-      a{
+      a, button{
+        border: 0;
+        background: none;
         color: #000;
         font-size: 14px;
-
+        cursor: pointer;
+        outline: 0;
+        font-weight: bold;
+        
         &:hover{
-          color: #999;
-          cursor: pointer;
+          color: #999;          
         }
 
         &.button{

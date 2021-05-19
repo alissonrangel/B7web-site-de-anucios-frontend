@@ -3,7 +3,8 @@ import './App.css';
 import Home from './pages/Home';
 import About from './pages/About';
 import NotFound from './pages/NotFound';
-import Login from './pages/SignIn';
+import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
 // import Categoria from './pages/Categoria'; 
 import styled from 'styled-components';
 import React, { useState , useEffect} from 'react';
@@ -26,11 +27,14 @@ function App() {
       <Route exact path="/">
         <Home />
       </Route>
-      <Route path="/signin">
-        <Login />
-      </Route>
       <Route exact path="/about">
         <About />
+      </Route>
+      <Route path="/signin">
+        <SignIn />
+      </Route>
+      <Route path="/signup">
+        <SignUp />
       </Route>            
       {/* <Route path="/categoria/:cat">
         <Categoria />

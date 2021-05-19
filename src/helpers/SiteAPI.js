@@ -1,6 +1,7 @@
 import React, { useState , useEffect} from 'react';
 import Cookies from 'js-cookie';
 import qs from 'qs';
+import { async } from 'q';
 
 const BASEAPI = 'http://alunos.b7web.com.br:501';
 
@@ -62,7 +63,23 @@ const SiteAPI = {
     );
     return json 
     // { error: 'Funcionalidade Imcompleta'};
+  },
+
+  register: async (name, email, password, stateLoc)=>{
+    const json = await apiFetchPost(
+      '/user/signup',
+      {name, email, password, state:stateLoc}
+    );
+    return json;
+  },
+
+  getStates: async () => {
+    const json = await apiFetchGet(
+      '/states'
+    );
+    return json.states;
   }
+
 };
 
 export default () => SiteAPI;

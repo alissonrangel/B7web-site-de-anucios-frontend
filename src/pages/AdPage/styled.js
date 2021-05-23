@@ -106,12 +106,11 @@ export const OthersArea = styled.div`
     display: flex;
   }
   .adItem{
-    
     width: 500px;
   }
 `
 
-export const BreadChumb = styled.div`
+export const BreadCrumb = styled.div`
   font-size:13px;
   margin-top: 20px;
 

@@ -10,6 +10,7 @@ import AdPage from './pages/AdPage';
 import styled from 'styled-components';
 import React, { useState , useEffect} from 'react';
 import  {BrowserRouter, Switch, Route, Link, Redirect} from 'react-router-dom';
+import RouteHandler from './components/RouteHandler';
 
 const isLogged = false;
 
@@ -25,27 +26,30 @@ function App() {
 
   return (    
     <Switch>
-      <Route exact path="/">
+      <RouteHandler exact path="/">
         <Home />
-      </Route>
-      <Route exact path="/about">
+      </RouteHandler>
+      <RouteHandler exact path="/about">
         <About />
-      </Route>
-      <Route path="/signin">
+      </RouteHandler>
+      <RouteHandler exact path="/signin">
         <SignIn />
-      </Route>
-      <Route path="/signup">
+      </RouteHandler>
+      <RouteHandler exact path="/signup">
         <SignUp />
-      </Route>
-      <Route path="/ad/:id">
+      </RouteHandler>
+      <RouteHandler exact path="/ad/:id">
         <AdPage />
-      </Route>            
-      {/* <Route path="/categoria/:cat">
+      </RouteHandler> 
+      <RouteHandler private exact path="/post-an-ad">
+        <About />
+      </RouteHandler>            
+      {/* <RouteHandler path="/categoria/:cat">
         <Categoria />
-      </Route> */}
-      <Route path="*">
+      </RouteHandler> */}
+      <RouteHandler path="*">
         <NotFound />        
-      </Route>
+      </RouteHandler>
     </Switch>
   );
 }

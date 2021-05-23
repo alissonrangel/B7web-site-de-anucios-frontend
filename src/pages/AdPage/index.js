@@ -1,6 +1,6 @@
 import React, { useState , useEffect} from 'react';
 import  { Link, useParams } from 'react-router-dom';
-import { PageArea, Fake, OthersArea, BreadChumb } from './styled'
+import { PageArea, Fake, OthersArea, BreadCrumb } from './styled'
 import { PageContainer, PageTitle, ErrorMessage } from '../../components/MainComponents';
 import AdItem from '../../components/partials/AdItem';
 import useAPI from '../../helpers/SiteAPI';
@@ -41,7 +41,7 @@ const Page = () => {
   return (
     <PageContainer>
       { adInfo.category && 
-        <BreadChumb>
+        <BreadCrumb>
           Você está aqui:
           <Link to='/'>Home</Link>
           /
@@ -50,7 +50,7 @@ const Page = () => {
           <Link to={`/ads?state=${adInfo.stateName}&cat=${adInfo.category.slug}`}>{adInfo.category.name}</Link>
           /
           <Link to='/'>{adInfo.title}</Link>        
-        </BreadChumb>
+        </BreadCrumb>
       }
       <PageArea >
 

@@ -35,18 +35,22 @@ const Page = () => {
     const getRecentAds = async () => {
       const json = await api.getAds({
         sort:'desc',
-        limit:8
+        limit:16
       });
       setAdList(json.ads);
     }
     getRecentAds();
   }, []);
 
+  const clique = ()=>{
+    console.log(adList);
+  }
 
   return (
     <>
       <SearchArea>
         <PageContainer>
+          <button onClick={clique}>Clique</button>
           <div className="searchBox">
             <form method="GET" action="/ads"> 
               <input type="text" name="q" placeholder="O que você procura?"></input>

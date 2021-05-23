@@ -5,6 +5,7 @@ import About from './pages/About';
 import NotFound from './pages/NotFound';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
+import AdPage from './pages/AdPage';
 // import Categoria from './pages/Categoria'; 
 import styled from 'styled-components';
 import React, { useState , useEffect} from 'react';
@@ -35,6 +36,9 @@ function App() {
       </Route>
       <Route path="/signup">
         <SignUp />
+      </Route>
+      <Route path="/ad/:id">
+        <AdPage />
       </Route>            
       {/* <Route path="/categoria/:cat">
         <Categoria />

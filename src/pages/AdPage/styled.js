@@ -104,9 +104,11 @@ export const OthersArea = styled.div`
   }
   .list{
     display: flex;
-  }
-  .adItem{
-    width: 500px;
+    flex-wrap: wrap;
+
+    .adItem{
+      width: 33%;
+    }
   }
 `
 

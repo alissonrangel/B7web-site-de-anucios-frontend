@@ -73,6 +73,26 @@ export const SearchArea = styled.div`
       }
     }
   }
+
+  @media (max-width: 600px){
+    .searchBox form{
+      flex-direction: column;
+
+      input{
+        padding: 10px;
+        margin: 0 0 10px 0;
+      }
+      select{
+        width: 100%;
+        margin: 0 0 10px 0;
+      }      
+    }
+    .categoryList{       
+      .categoryItem{
+        width: 50%;
+      }
+    }
+  }
 `;
 
 export const PageArea = styled.div`
@@ -94,5 +114,15 @@ export const PageArea = styled.div`
     font-weight: bold;
     display: inline-block;
     margin-top: 10px;
+  }
+
+  @media (max-width: 600px){
+
+    &{
+      margin: 10px;
+    }
+    .list .adItem{
+      width: 50%;
+    }
   }
 `;

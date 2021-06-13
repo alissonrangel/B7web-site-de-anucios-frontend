@@ -12,6 +12,7 @@ const Page = () => {
 
   const [name, setName] = useState('');
   const [stateLoc, setStateLoc] = useState('');
+  const [stateLocId, setStateLocId] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -23,8 +24,27 @@ const Page = () => {
 
   useEffect(()=>{
     
+    const getUserInfo = async () => {
+      const user = await api.userInfo();
+      setName(user.name);
+      setEmail(user.email);
+      setStateLoc(user.state);
+    }
+
+    getUserInfo();
+  }, []);
+
+  useEffect(()=>{
+    
     const getStates = async () => {
       const slist = await api.getStates();
+
+      for (let i = 0; i < slist.length; i++) {
+        if(slist[i].name === stateLoc){
+          console.log('IDDDDD: '+slist[i]._id);          
+          setStateLocId(slist[i]._id);
+        }        
+      }
       setStateList(slist);
     }
 
@@ -38,14 +58,13 @@ const Page = () => {
 
     setError('');
 
-    if ( password !== confirmPassword ){
-      setError('Senhas não batem');
-      setDisabled(false);
-      return;
-    }
+    // if ( password !== confirmPassword ){
+    //   setError('Senhas não batem');
+    //   setDisabled(false);
+    //   return;
+    // }
 
-    //const json = await api.register(name, email, password, stateLoc);
-    const json = await api.register(name, email, password, stateLoc);
+    const json = await api.userUpdate(name, email, password, stateLoc);
 
     if ( json.error){
       setError(json.error);
@@ -58,7 +77,7 @@ const Page = () => {
 
   return (
     <PageContainer>
-      <PageTitle>Cadastro</PageTitle>
+      <PageTitle>Informações do Usuário</PageTitle>
       <PageArea >
         {error &&
           <ErrorMessage>
@@ -88,12 +107,12 @@ const Page = () => {
                 disabled={disabled}
                 required
                 value={stateLoc}
-                onChange={e=>setStateLoc(e.target.value)} 
+                onChange={e=>setStateLoc(e.target.value)}                 
               >
-                <option></option>
+                <option></option>                
                 {
                   stateList.map( (i, k) => 
-                    <option key={k} value={i._id}>{i.name}</option>
+                    <option  key={k} value={i.name} >{i.name}</option>
                   )
                 }
               </select>
@@ -124,7 +143,7 @@ const Page = () => {
             </div>
           </label>
           <label className="area">
-            <div className="area--title">Confirmar Senha</div>
+            <div className="area--title">Nova Senha</div>
             <div className="area--input">
               <input 
                 type="password" 
@@ -137,7 +156,7 @@ const Page = () => {
           <div className="area">
             <div className="area--title"></div>
             <div className="area--input">
-              <button disabled={disabled}>Fazer Cadastro</button>
+              <button disabled={disabled}>Alterar Dados</button>
             </div>
           </div>
         </form>

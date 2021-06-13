@@ -3,6 +3,12 @@ import styled from 'styled-components';
 export const PageArea = styled.div`
   
   form{
+    *{
+      padding: 0;
+      margin:0;
+      box-sizing: border-box;
+    }
+
     background-color: #fff;
     border-radius: 3px;
     padding: 10px;
@@ -25,7 +31,7 @@ export const PageArea = styled.div`
       .area--input{
         flex: 1;
 
-        input{
+        input, select, textarea{
           width: 100%;
           font-size: 14px;
           padding: 5px;
@@ -39,6 +45,10 @@ export const PageArea = styled.div`
             color: #333;
             box-shadow: 0px 0px 3px #999;
           }
+        }
+        textarea{
+          height: 150px;
+          resize: none;
         }
 
         button{
@@ -57,29 +67,6 @@ export const PageArea = styled.div`
         }
       }
 
-    }
-  }
-  @media (max-width: 600px){
-
-    form{
-      .area{
-        flex-direction: column;
-        padding: 0;
-        .area--title{
-          width: 100%;
-          margin: 0 0 10px 20px;
-          text-align:left;
-        }
-        .area--input{
-          width: 100%;
-          margin: 0 0 10px 0;
-
-          button{
-            width: 100%;
-            padding: 10px;
-          }
-        }
-      }
     }
   }
 `;

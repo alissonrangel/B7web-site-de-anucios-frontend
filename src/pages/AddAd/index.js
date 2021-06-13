@@ -21,6 +21,7 @@ const Page = () => {
   const [price, setPrice] = useState();
   const [priceNegotiable, setPriceNegotiable] = useState(false);
   const [desc, setDesc] = useState('');
+  const [featuredImage, setFeaturedImage] = useState(null);
 
   const [disabled, setDisabled] = useState(false);
   const [error, setError] = useState('');
@@ -53,15 +54,18 @@ const Page = () => {
       const fData = new FormData();
       fData.append('title', title);
       fData.append('price', price);
-      fData.append('priceneg', priceNegotiable);
+      fData.append('featured_image', featuredImage);
+      // fData.append('priceneg', priceNegotiable);
+      fData.append('priceNegotiable', priceNegotiable);
       fData.append('desc', desc);
+      fData.append('image', 'default.png');
       fData.append('cat', category);
 
-      if ( fileField.current.files.length > 0){
-        for (let i = 0; i < fileField.current.files.length; i++) {
-          fData.append('img', fileField.current.files[i]);          
-        }
-      }
+      // if ( fileField.current.files.length > 0){
+      //   for (let i = 0; i < fileField.current.files.length; i++) {
+      //     fData.append('featured_image', fileField.current.files[i]);          
+      //   }
+      // }
 
       const json = await api.addAd(fData);
 
@@ -156,14 +160,16 @@ const Page = () => {
             </div>
           </label>
           <label className="area">
-            <div className="area--title">Imagens (1 ou mais)</div>
+            <div className="area--title">Imagem</div>
             <div className="area--input">
               <input
                 type="file"
                 disabled={disabled}
                 required
-                multiple
-                ref={fileField}                                
+                accept="image/*"
+                multiple={false}
+                ref={fileField}
+                onChange={(e)=>setFeaturedImage(e.target.files[0])}                                
               />
             </div>
           </label>

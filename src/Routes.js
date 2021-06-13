@@ -8,6 +8,8 @@ import SignUp from './pages/SignUp';
 import AdPage from './pages/AdPage';
 import AddAd from './pages/AddAd';
 import Ads from './pages/Ads';
+import UserPage from './pages/UserPage';
+
 // import Categoria from './pages/Categoria'; 
 import styled from 'styled-components';
 import React, { useState , useEffect} from 'react';
@@ -48,6 +50,9 @@ function App() {
       </RouteHandler> 
       <RouteHandler exact path="/ads">
         <Ads />
+      </RouteHandler>   
+      <RouteHandler private exact path="/my-account">
+        <UserPage />
       </RouteHandler>            
       {/* <RouteHandler path="/categoria/:cat">
         <Categoria />

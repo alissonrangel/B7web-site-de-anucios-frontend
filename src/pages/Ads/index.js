@@ -43,11 +43,11 @@ const Page = () => {
 
     let offset = 0;
 
-    offset = (currentPage-1) * 10;
+    offset = (currentPage-1) * 30;
 
     const json = await api.getAds({
       sort:'desc',
-      limit:10,
+      limit:30,
       q,
       cat,
       state,

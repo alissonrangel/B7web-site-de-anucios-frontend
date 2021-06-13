@@ -20,16 +20,18 @@ const Page = () => {
   useEffect(()=>{
     const getAdInfo = async (id) => {
       const json = await api.getAd(id, true);
-      console.log(json);     
-      setAdInfo(json);
+      console.log(json.ad);     
+      setAdInfo(json.ad);
       setLoading(false);
     }
     getAdInfo(id)
   },[]);
 
   const formatDate = (date) => {
+    console.log(date);
     let cDate = new Date(date);
-
+    console.log(cDate);
+    
     let months = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
     let cDay = cDate.getDate();
     let cMonth = cDate.getMonth();
@@ -58,7 +60,7 @@ const Page = () => {
           <div className='box'>
             <div className='adImage'>
               { loading && <Fake height={300} /> }
-              { adInfo.images &&
+              {/* { adInfo.images &&
                   <Slide>
                    {adInfo.images.map((img, k)=>
                     <div key={k} className="each-slide">                      
@@ -67,6 +69,9 @@ const Page = () => {
                   )}
                   </Slide>
                 
+              } */}
+              { adInfo.featured_image &&                                       
+                <img style={{width: 300}} src={adInfo.featured_image} alt='' />                                                    
               }
             </div>
             <div className='adInfo'>
@@ -83,9 +88,17 @@ const Page = () => {
                 { loading && <Fake height={100}/> }
                 {adInfo.description} 
                 <hr/>
-                { adInfo.views &&
+                {/* { adInfo.views &&
                   <small>Visualizações: {adInfo.views}</small>
-                }
+                } */}
+              </div> 
+              <div className='adDescription'>
+                { loading && <Fake height={100}/> }
+                  E-mail do vendedor:<br/>{adInfo.email} 
+                <hr/>
+                {/* { adInfo.views &&
+                  <small>Visualizações: {adInfo.views}</small>
+                } */}
               </div> 
             </div>
           </div>

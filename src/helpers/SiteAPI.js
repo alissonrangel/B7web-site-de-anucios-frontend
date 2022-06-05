@@ -4,37 +4,8 @@ import qs from 'qs';
 import { async } from 'q';
 
 // const BASEAPI = 'http://alunos.b7web.com.br:501';
-const BASEAPI = 'http://127.0.0.1:3000';
-const apiFetchFile = async (endpoint, body) => {
-  
-  //let token = Cookies.get('token');
-  
-  //if (!body.token){
-  let token = Cookies.get('token');
-  if(token){
-    body.append('token', token);
-  }
-  //}
-  console.log("BODY>TOKEN");
-  
-  console.log(token);
-  
-  const res = await fetch(BASEAPI+endpoint, {
-    method: 'POST',    
-    headers:{
-      'Authorization': token      
-    },
-    body
-  });
-  const json = await res.json();
+const BASEAPI = process.env.REACT_APP_BASEAPI;
 
-  if ( json.notallowed) {
-    window.location.href = '/signin';
-    return;
-  }
-
-  return json;
-}
 const apiFetchPost = async (endpoint, body) => {
 
   if (!body.token){
@@ -62,6 +33,58 @@ const apiFetchPost = async (endpoint, body) => {
 
   return json;
 }
+
+const apiFetchGet = async (endpoint, body = []) => {
+
+  if (!body.token){
+    let token = Cookies.get('token');
+    if(token){
+      body.token = token;
+    }
+  }
+
+  const res = await fetch(`${BASEAPI+endpoint}?${qs.stringify(body)}`); 
+
+  const json = await res.json();
+
+  if ( json.notallowed) {
+    window.location.href = '/signin';
+    return;
+  }
+
+  return json;
+}
+
+const apiFetchFile = async (endpoint, body) => {
+  
+  //let token = Cookies.get('token');
+  
+  if (!body.token){
+    let token = Cookies.get('token');
+    if(token){
+      body.append('token', token);
+      console.log("BODY>TOKEN");
+      console.log(token);
+    }
+  }
+  
+  const res = await fetch(BASEAPI+endpoint, {
+    method: 'POST',    
+    // headers:{
+    //   'Authorization': token      
+    // },
+    body // pois está em formData
+  });
+  const json = await res.json();
+
+  if ( json.notallowed) {
+    window.location.href = '/signin';
+    return;
+  }
+
+  return json;
+}
+
 const apiFetchPut = async (endpoint, body) => {
 
   if (!body.token){
@@ -89,26 +112,7 @@ const apiFetchPut = async (endpoint, body) => {
 
   return json;
 }
-const apiFetchGet = async (endpoint, body = []) => {
 
-  if (!body.token){
-    let token = Cookies.get('token');
-    if(token){
-      body.token = token;
-    }
-  }
-
-  const res = await fetch(`${BASEAPI+endpoint}?${qs.stringify(body)}`); 
-
-  const json = await res.json();
-
-  if ( json.notallowed) {
-    window.location.href = '/signin';
-    return;
-  }
-
-  return json;
-}
 const apiFetchGet1 = async (endpoint, body = []) => {
 
   if (!body.token){
@@ -142,7 +146,8 @@ const SiteAPI = {
       {email, password}
     );
     return json 
-    // { error: 'Funcionalidade Imcompleta'};
+    //return { error: 'Funcionalidade Imcompleta'};
+    // return { error: ''};
   },
 
   register: async (name, email, password, stateLoc)=>{

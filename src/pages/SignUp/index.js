@@ -48,7 +48,18 @@ const Page = () => {
     const json = await api.register(name, email, password, stateLoc);
 
     if ( json.error){
-      setError(json.error);
+      if (json.error.name) {
+        setError(json.error.name.msg)
+      }
+      if (json.error.email) {
+        setError(json.error.email.msg)
+      }
+      if (json.error.password) {
+        setError(json.error.password.msg)
+      }
+      if (json.error.state) {
+        setError(json.error.state.msg)
+      }      
     } else {
       doLogin(json.token);
       window.location.href = '/';
@@ -82,7 +93,7 @@ const Page = () => {
           </label>
           <label className="area">
             <div className="area--title">Estado</div>
-            <div className="area--input">
+            <div className="area--input area--input--select">
               <select
                 className="select"                
                 disabled={disabled}
@@ -131,6 +142,7 @@ const Page = () => {
                 disabled={disabled}
                 checked={confirmPassword}
                 onChange={(e)=>setConfirmPassword(e.target.value)}
+                required
               />
             </div>
           </label>

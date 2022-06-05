@@ -26,7 +26,7 @@ const PrivateRoute = ({children, ...rest}) => {
   )
 }
 
-function App() {
+function Routes() {
 
   return (    
     <Switch>
@@ -64,4 +64,4 @@ function App() {
   );
 }
 
-export default App;
+export default Routes;

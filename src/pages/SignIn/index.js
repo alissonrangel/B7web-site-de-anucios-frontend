@@ -1,5 +1,5 @@
-import React, { useState , useEffect} from 'react';
-import  { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+// import  { Link } from 'react-router-dom';
 import { PageArea } from './styled'
 import { PageContainer, PageTitle, ErrorMessage } from '../../components/MainComponents'
 import useAPI from '../../helpers/SiteAPI';
@@ -24,9 +24,14 @@ const Page = () => {
     setError('');
     
     const json = await api.login(email, password);
-
+    console.log(json);
     if ( json.error){
-      setError(json.error);
+      if (json.error.password) {
+        setError(json.error.password.msg);  
+      }
+      if (json.error.email) {
+        setError(json.error.email.msg);  
+      }
     } else {
       doLogin(json.token, rememberPassword);
       window.location.href = '/';
@@ -43,7 +48,7 @@ const Page = () => {
             {error}
           </ErrorMessage>
         }
-        <Link to="/" >Voltar para a HOME</Link>
+        {/* <Link to="/" >Voltar para a HOME</Link> */}
 
         <form onSubmit={handleSubmit}>
           <label className="area">

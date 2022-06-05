@@ -20,8 +20,8 @@ const Page = () => {
   useEffect(()=>{
     const getAdInfo = async (id) => {
       const json = await api.getAd(id, true);
-      console.log(json.ad);     
-      setAdInfo(json.ad);
+      console.log(json);     
+      setAdInfo(json);
       setLoading(false);
     }
     getAdInfo(id)
@@ -51,7 +51,7 @@ const Page = () => {
           /
           <Link to={`/ads?state=${adInfo.stateName}&cat=${adInfo.category.slug}`}>{adInfo.category.name}</Link>
           /
-          <Link to='/'>{adInfo.title}</Link>        
+          {` ${adInfo.title}`}
         </BreadCrumb>
       }
       <PageArea >
@@ -60,7 +60,7 @@ const Page = () => {
           <div className='box'>
             <div className='adImage'>
               { loading && <Fake height={300} /> }
-              {/* { adInfo.images &&
+              { adInfo.images &&
                   <Slide>
                    {adInfo.images.map((img, k)=>
                     <div key={k} className="each-slide">                      
@@ -69,10 +69,10 @@ const Page = () => {
                   )}
                   </Slide>
                 
-              } */}
-              { adInfo.featured_image &&                                       
-                <img style={{width: 300}} src={adInfo.featured_image} alt='' />                                                    
               }
+              {/* { adInfo.featured_image &&                                       
+                <img style={{width: 300}} src={adInfo.featured_image} alt='' />                                                    
+              } */}
             </div>
             <div className='adInfo'>
               <div className='adName'>
@@ -88,28 +88,28 @@ const Page = () => {
                 { loading && <Fake height={100}/> }
                 {adInfo.description} 
                 <hr/>
-                {/* { adInfo.views &&
+                { adInfo.views &&
                   <small>Visualizações: {adInfo.views}</small>
-                } */}
+                }
               </div> 
-              <div className='adDescription'>
+              {/* <div className='adDescription'>
                 { loading && <Fake height={100}/> }
-                  E-mail do vendedor:<br/>{adInfo.email} 
+                  E-mail do vendedor:<br/>{adInfo.userInfo.email} 
                 <hr/>
-                {/* { adInfo.views &&
+                { adInfo.views &&
                   <small>Visualizações: {adInfo.views}</small>
-                } */}
-              </div> 
+                }
+              </div>  */}
             </div>
           </div>
         </div>
         <div className='rightSide'>
           <div className='box box--padding'>
           { loading && <Fake height={20} /> }
-          { adInfo.priceNegociable &&
+          { adInfo.priceNegotiable &&
             "Preço Negociável"
           }
-          { !adInfo.priceNegociable && adInfo.price &&
+          { !adInfo.priceNegotiable && adInfo.price &&
             <div className='price'>Preço: <span>R$ {adInfo.price}</span></div>
           } 
           </div>         
@@ -128,7 +128,7 @@ const Page = () => {
         </div>              
       </PageArea>
       <OthersArea>
-      {adInfo.others &&
+        {adInfo.others &&
           <>
             <h2>Outras ofertas do vendedor</h2>
             <div className='list'>
@@ -138,7 +138,7 @@ const Page = () => {
             </div>
           </>
         }
-        </OthersArea>
+      </OthersArea>
     </PageContainer>
   );
 }

@@ -53,24 +53,23 @@ const Page = () => {
     if ( errors.length === 0){
       const fData = new FormData();
       fData.append('title', title);
-      fData.append('price', price);
-      fData.append('featured_image', featuredImage);
-      // fData.append('priceneg', priceNegotiable);
-      fData.append('priceNegotiable', priceNegotiable);
+      fData.append('price', price);      
+      fData.append('priceneg', priceNegotiable);
+      //fData.append('priceNegotiable', priceNegotiable);
       fData.append('desc', desc);
       fData.append('image', 'default.png');
       fData.append('cat', category);
 
-      // if ( fileField.current.files.length > 0){
-      //   for (let i = 0; i < fileField.current.files.length; i++) {
-      //     fData.append('featured_image', fileField.current.files[i]);          
-      //   }
-      // }
+      if ( fileField.current.files.length > 0){
+        for (let i = 0; i < fileField.current.files.length; i++) {
+          fData.append('img', fileField.current.files[i]);          
+        }
+      }
 
       const json = await api.addAd(fData);
 
       if (!json.error){
-        history.push(`/ad/${json.id}`);
+        history.push(`/ad/${json.id._id}`);
         return;
       } else {
         setError(json.error);
@@ -103,7 +102,7 @@ const Page = () => {
               <input 
                 type="text" 
                 disabled={disabled}
-                required
+                // required
                 value={title}
                 onChange={e=>setTitle(e.target.value)} 
               />
@@ -115,7 +114,7 @@ const Page = () => {
               <select
                 disabled={disabled}
                 onChange={e=>setCategory(e.target.value)}
-                required
+                // required
               >
                 <option></option>
                 { categories && categories.map((i, k)=>
@@ -130,7 +129,7 @@ const Page = () => {
             <input 
                 type="number"
                 step="0.01"                 
-                disabled={disabled}
+                disabled={disabled || priceNegotiable}
                 required
                 value={price}
                 onChange={e=>setPrice(e.target.value)} 
@@ -165,11 +164,11 @@ const Page = () => {
               <input
                 type="file"
                 disabled={disabled}
-                required
+                // required
                 accept="image/*"
-                multiple={false}
+                multiple
                 ref={fileField}
-                onChange={(e)=>setFeaturedImage(e.target.files[0])}                                
+                // onChange={(e)=>setFeaturedImage(e.target.files[0])}                                
               />
             </div>
           </label>

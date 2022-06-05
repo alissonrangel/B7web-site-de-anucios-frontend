@@ -6,7 +6,7 @@ import useAPI from '../../helpers/SiteAPI';
 import AdItem from '../../components/partials/AdItem';
 import { async } from 'q';
 
-let timer;
+let timer; //criado uma vez, quando fora do componente
 
 const Page = () => {
 
@@ -42,12 +42,12 @@ const Page = () => {
     setLoading(true);
 
     let offset = 0;
-
-    offset = (currentPage-1) * 30;
+    let qtdPorPagina = 3;
+    offset = (currentPage-1) * qtdPorPagina;
 
     const json = await api.getAds({
       sort:'desc',
-      limit:30,
+      limit:qtdPorPagina,
       q,
       cat,
       state,
@@ -134,6 +134,20 @@ const Page = () => {
     console.log(adList);
   }
 
+  const handleCategory = (isActive, slug, element) => {
+
+    if(isActive){
+      setCat('')
+      // let lis = document.getElementsByClassName('category');
+      // for (const item of lis) {
+      //   item.classList.remove('active');
+      // }
+      element.classList.remove('active');
+    }else {
+      setCat(slug);      
+    }
+  }
+
   return (
     <PageContainer>
       <PageArea>
@@ -159,8 +173,9 @@ const Page = () => {
               { categories.map((i,k)=>
                   <li 
                     key={k} 
-                    className={cat == i.slug? 'categoryItem active':'categoryItem'}
-                    onClick={()=>setCat(i.slug)}
+                    className={`${(cat == i.slug) ? 'categoryItem active':'categoryItem'}`}
+                    // onClick={()=>setCat(i.slug)}
+                    onClick={(e) => handleCategory(cat === i.slug, i.slug, e.target)}
                   >
                     <img src={i.img} alt=''/>
                     <span>{i.name}</span>

@@ -30,6 +30,9 @@ const Header = () => {
               <>
                 <li>
                   <Link to="/my-account" >Minha conta</Link>
+                </li>                                
+                <li>
+                  <Link to="/about">Sobre</Link>
                 </li>
                 <li>
                   <button onClick={handleLogout}>Sair</button>
@@ -42,10 +45,16 @@ const Header = () => {
             { !logged &&
               <>
                 <li>
+                  <Link to="/about">Sobre</Link>
+                </li>
+                <li>
                   <Link to="/signin">Login</Link>
                 </li>
                 <li>
                   <Link to="/signup">Cadastrar</Link>
+                </li>
+                <li>
+                  <Link to="/signin" className="button">Poste um anúncio</Link>
                 </li>
               </>
             }

@@ -112,7 +112,7 @@ const Page = () => {
                 <option></option>                
                 {
                   stateList.map( (i, k) => 
-                    <option  key={k} value={i.name} >{i.name}</option>
+                    <option  key={k} value={i._id} >{i.name}</option>
                   )
                 }
               </select>

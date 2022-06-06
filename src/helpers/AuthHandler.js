@@ -6,6 +6,13 @@ import Cookies from 'js-cookie';
 
 export const isLogged = () => {
   let token = Cookies.get('token');
+  //console.log(typeof token === "undefined");
+  if (token === "undefined"){
+    Cookies.remove('token');
+    console.log('Aqui0');
+    return false;
+  }
+  console.log('Aqui1');
   return (token) ? true : false;
 }
 

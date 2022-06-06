@@ -64,15 +64,15 @@ export const PageArea = styled.div`
     form{
       .area{
         flex-direction: column;
-        padding: 0;
+        // padding: 0;
         .area--title{
           width: 100%;
-          margin: 0 0 10px 20px;
+          margin: 0 0 10px 0;
           text-align:left;
         }
         .area--input{
-          width: 100%;
-          margin: 0 0 10px 0;
+          width: 100%;          
+          margin: 0 0 10px 0;          
 
           button{
             width: 100%;

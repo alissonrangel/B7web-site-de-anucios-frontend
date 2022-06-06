@@ -1,7 +1,6 @@
 import React, { useState , useEffect} from 'react';
 import Cookies from 'js-cookie';
 import qs from 'qs';
-import { async } from 'q';
 
 // const BASEAPI = 'http://alunos.b7web.com.br:501';
 const BASEAPI = process.env.REACT_APP_BASEAPI;

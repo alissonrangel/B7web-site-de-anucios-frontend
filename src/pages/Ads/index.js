@@ -42,7 +42,7 @@ const Page = () => {
     setLoading(true);
 
     let offset = 0;
-    let qtdPorPagina = 3;
+    let qtdPorPagina = 2;
     offset = (currentPage-1) * qtdPorPagina;
 
     const json = await api.getAds({
@@ -199,7 +199,7 @@ const Page = () => {
           </div>
           <div className='pagination'>
             {pagination && pagination.map((i,k)=>
-                <div onClick={()=>setCurrentPage(i)} className={ i === currentPage ? 'pagItem active': 'pagItem'}>{i}</div>
+                <div key={`pag${k}`} onClick={()=>setCurrentPage(i)} className={ i === currentPage ? 'pagItem active': 'pagItem'}>{i}</div>
               )}
           </div>
         </div>

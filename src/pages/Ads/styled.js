@@ -54,7 +54,16 @@ export const PageArea = styled.div`
       }
     }
 
-    .categoryItem:hover, .categoryItem.active{
+    // .categoryItem:hover, .categoryItem.active{
+    //   background-color: #9bb83c;
+    //   color: white;
+    // }
+    .categoryItem:hover{
+      background-color: #9bb83c;
+      color: white;
+      opacity: 0.7;
+    }
+    .categoryItem.active{
       background-color: #9bb83c;
       color: white;
     }
